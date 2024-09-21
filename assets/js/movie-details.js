@@ -8,7 +8,7 @@ $(document).ready(function() {
     }
 
     function fetchMovieDetails(title) {
-        const apiKey = 'bcf9754d'; // Reemplaza con tu clave de la API de OMDb
+        const apiKey = 'efb82061'; // Reemplaza con tu clave de la API de OMDb
         const url = `https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}`;
 
         $.ajax({
