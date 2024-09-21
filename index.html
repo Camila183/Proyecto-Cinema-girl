@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+    <title>Cinema Girl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="assets/style/intro.css">
+</head>
+<body>
+    <div class="intro">
+        <h1 class="logo"> 
+            <span class="logo-parts">C</span>
+            <span class="logo-parts">I</span>
+            <span class="logo-parts">N</span>
+            <span class="logo-parts">E</span>
+            <span class="logo-parts">M</span>
+            <span class="logo-parts">A</span>
+            <span class="logo-parts">⭒</span>
+            <span class="logo-parts">G</span>
+            <span class="logo-parts">I</span>
+            <span class="logo-parts">R</span>
+            <span class="logo-parts">L</span>
+        </h1>
+    </div>
+
+    <!--aqui viene el menu-->
+    
+    <header>
+        <nav>
+            <img src="assets/img/CINEMA.png" alt="cinema" class="cinema">
+            <ul class="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li>
+                    <a href="#">Categorías</a>
+                    <ul>
+                        <li><a href="categorias.html?categoria=harry+potter">Harry Potter</a></li>
+                        <li><a href="categorias.html?categoria=barbie">Barbie</a></li>
+                        <li><a href="categorias.html?categoria=spider+man">Spiderman</a></li>
+                        <li><a href="categorias.html?categoria=monster+high">Monster High</a></li>
+                        <li><a href="categorias.html?categoria=star+wars">Star Wars</a></li>
+                        <li><a href="categorias.html?categoria=lord+of+the+rings">The Lord of the Rings</a></li>
+                        <li><a href="categorias.html?categoria=x+men">X-Men</a></li>
+                    </ul>
+                </li>
+                <li><a href="nosotras.html">Nosotras</a></li>
+                <li><a href="contacto.html">Contáctanos</a></li>
+            </ul>
+        </nav>
+      </header>
+    
+        <div class="hero">
+          <h1>Explora el Mundo del Cine</h1>
+          <p>Descubre tus películas favoritas</p>
+            <a href="buscador.html">Comenzar</a>
+        </div>
+    
+   <!--Aqui es la parte baja de la web-->
+
+   <main>
+    <section class="description-section">
+      <h2>Descubre un nuevo mundo de entretenimiento</h2>
+      <p>Encuentra información detallada sobre miles de películas de todo tipo, y mantente al día con los últimos estrenos y películas más populares.</p>
+    </section>
+    <h2 class="peliRecomendadas">Recomendaciones del Día</h2>
+    <div id="recomendaciones"></div>
+  </main>
+
+  <footer>
+    <p>API proporcionada por <a href="https://www.omdbapi.com/" target="_blank">OMDb API</a></p>
+  </footer>
+
+      <script  
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"></script>
+    <script src="assets/js/intro.js"></script>  
+    <script src="assets/js/script.js"></script>
+
+</body>
+</html>

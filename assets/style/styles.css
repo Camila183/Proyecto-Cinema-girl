@@ -1,0 +1,75 @@
+/* Contenedor principal */
+#movies-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Espacio entre las tarjetas */
+}
+
+/* Tarjetas de películas */
+#movies-container .movies-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    margin: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación suave */
+}
+
+/* Imagen dentro de las tarjetas */
+#movies-container .movies-container img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Título de la película */
+#movies-container .movies-container h4 a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Año de la película */
+#movies-container .movies-container h3 {
+    color: #555;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Efecto de hover (animación) */
+#movies-container .movies-container:hover {
+    transform: scale(1.05); /* Efecto de zoom */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+}
+
+
+/* Estilos del menú */
+nav{
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0px;
+    padding-right: 1%;
+  }
+  
+  .cinema{
+    width: 100px;
+  }
+  
+  ul, ol {
+    list-style: none;
+  }
+  
+  h1{
+    padding: 10px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: purple;
+    text-align: center;
+}
