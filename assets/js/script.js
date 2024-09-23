@@ -134,25 +134,7 @@ $(document).ready(function(){
       </nav>
     </header>
       <main>
-     
-
-        <!-- Contenedor donde se mostrarán los resultados de búsqueda -->
-        <!-- Filtros -->
-        <h1 id="result">Resultados de la búsqueda</h1>
-        <div id="filtro">
-          <label for="ordenar">Ordenar por:</label>
-          <select id="ordena">
-            <option value="titulo">Título (A-Z)</option>
-            <option value="titulo-desc">Título (Z-A)</option>
-            <option value="anio-asc">Año (Ascendente)</option>
-            <option value="anio-desc">Año (Descendente)</option>
-          </select>
-
-          <label for="filtroAnio">Mostrar películas después del año:</label>
-          <input type="number" id="filtroAño" placeholder="Ingrese un año" />
-
-          <button id="aplicarFiltro">Aplicar Filtros</button>
-        </div>
+    
 
         <div id="movies-container" class="movies-grid"></div>
         
