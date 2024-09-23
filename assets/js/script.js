@@ -1,6 +1,6 @@
 function generateUrl() {
   let id = Math.floor(Math.random() * 9000000) + 1000000;
-  return `https://www.omdbapi.com/?i=tt${id}&apikey=efb82061&type=movie`;
+  return `https://www.omdbapi.com/?i=tt${id}&apikey=906b5c9d&type=movie`;
 }
 
 
@@ -55,119 +55,97 @@ function mostrarDatos(info) {
 }
 
 
+$(document).ready(function () {
+  const apikey = "906b5c9d";
+  let peliculasOriginales = []; // Para almacenar las películas obtenidas
 
-
-
-
-
-
-const apikey = 'efb82061'; 
-
-$(document).ready(function(){
   $("#search-form").submit(function (e) {
-      e.preventDefault(); // Evitar que la página se recargue
-      let nombrePelicula = $("#search-input").val().toLowerCase();
-      
-      if (nombrePelicula) {
-          // Borrar todo el contenido del body antes de mostrar los resultados
-          $('body').empty();
-          buscarPelicula(nombrePelicula);
-      } else {
-          alert("Necesita colocar un valor en el input");
-      }
-      $("#search-input").val("");
+    e.preventDefault(); // Evitar que la página se recargue
+    let nombrePelicula = $("#search-input").val().toLowerCase();
+    buscarPeliculasPorCategoria(nombrePelicula);
   });
 
-  function buscarPelicula(movie) {
-      $.ajax({
-          type: "GET",
-          url:  `https://www.omdbapi.com/?apikey=${apikey}&s=${movie}`,
-          dataType: "json",
-          success: function (data) {
-              renderMovie(data);
-          },
-          error: function() {
-              alert('Error al buscar la película.');
-          }
-      });
+  function buscarPeliculasPorCategoria(categoria) {
+    $("#titulo-categoria").text(`Películas de ${categoria.replace("+", " ")}`);
+    const query = encodeURIComponent(categoria);
+    const apiUrl = `https://www.omdbapi.com/?apikey=${apikey}&s=${query}`;
+
+    $.ajax({
+      type: "GET",
+      url: apiUrl,
+      dataType: "json",
+      success: function (data) {
+        if (data.Search) {
+          peliculasOriginales = data.Search; // Almacena las películas
+          mostrarPeliculas(peliculasOriginales); // Muestra las películas
+        } else {
+          $("#movies-container").html("<p>No se encontraron resultados.</p>");
+        }
+      },
+      error: function () {
+        alert("Error al buscar la película.");
+      },
+    });
   }
 
-  function renderMovie(data) {
-      // Crear una nueva estructura HTML
-      const newHtml = `
-              <header>
-      <nav>
-        <img src="assets/img/CINEMA.png" alt="cinema" class="cinema" />
-        <ul class="menu">
-          <li><a href="index.html">Inicio</a></li>
-          <li>
-            <a href="#">Categorías</a>
-            <ul>
-              <li>
-                <a href="categorias.html?categoria=harry+potter"
-                  >Harry Potter</a
-                >
-              </li>
-              <li><a href="categorias.html?categoria=barbie">Barbie</a></li>
-              <li>
-                <a href="categorias.html?categoria=spider+man">Spiderman</a>
-              </li>
-              <li>
-                <a href="categorias.html?categoria=monster+high"
-                  >Monster High</a
-                >
-              </li>
-              <li>
-                <a href="categorias.html?categoria=star+wars">Star Wars</a>
-              </li>
-              <li>
-                <a href="categorias.html?categoria=lord+of+the+rings"
-                  >The Lord of the Rings</a
-                >
-              </li>
-              <li><a href="categorias.html?categoria=x+men">X-Men</a></li>
-            </ul>
-          </li>
-          <li><a href="nosotras.html">Nosotras</a></li>
-          <li><a href="contacto.html">Contáctanos</a></li>
-        </ul>
-      </nav>
-    </header>
-      <main>
-    
+  function mostrarPeliculas(peliculas) {
+    const moviesContainer = $("#movies-container");
+    moviesContainer.empty();
 
-        <div id="movies-container" class="movies-grid"></div>
-        
-    
-    </main>
-      `;
-      
-      // Añadir la nueva estructura HTML al body
-      $('body').html(newHtml);
+    peliculas.forEach(function (pelicula) {
+      const poster =
+        pelicula.Poster !== "N/A"
+          ? pelicula.Poster
+          : "https://via.placeholder.com/300x450";
+      const movieTitle = pelicula.Title;
+      const movieYear = pelicula.Year;
 
-      const movieContainer = $("#movies-container");
-
-      if (data.Response === "True") {
-          data.Search.forEach(function(movie) {
-              let moviePoster = $("<div></div>").addClass("movies-container");
-
-              $("<img>").attr("src", movie.Poster !== "N/A" ? movie.Poster : 'https://via.placeholder.com/300x450').appendTo(moviePoster);
-              $("<h3></h3>").text(movie.Year).appendTo(moviePoster);
-              $("<h4></h4>")
-              .html(`<a href="movie-details.html?title=${encodeURIComponent(movie.Title)}" target="_blank">${movie.Title.toUpperCase()}</a>`)
-              .appendTo(moviePoster);
-          
-
-              movieContainer.append(moviePoster);
-          });
-      } else {
-          movieContainer.html('<p>No se encontraron resultados.</p>');
-      }
-
-      // Añadir funcionalidad al botón de "Volver a buscar"
-      $("#volver").click(function() {
-          location.reload(); // Recargar la página para volver al formulario original
-      });
+      const movieDiv = `
+                <div class="movie">
+                    <img src="${poster}" alt="${movieTitle}">
+                    <div class="movie-title">
+                        <a href="movie-details.html?title=${encodeURIComponent(
+                          movieTitle
+                        )}" target="_blank">${movieTitle} (${movieYear})</a>
+                    </div>
+                </div>
+            `;
+      moviesContainer.append(movieDiv);
+    });
   }
+
+  // Aplicar los filtros al hacer clic en "Aplicar Filtros"
+  $("#aplicarFiltros").click(function () {
+    let peliculasFiltradas = [...peliculasOriginales]; // Crea una copia de las películas originales
+
+    const filtroAnio = $("#filtroAnio").val(); // Año ingresado para filtrar
+    const ordenSeleccionado = $("#ordenar").val(); // Orden seleccionado
+
+    // Filtrar por año si se ingresó un valor
+    if (filtroAnio) {
+      peliculasFiltradas = peliculasFiltradas.filter(
+        (pelicula) => parseInt(pelicula.Year) > parseInt(filtroAnio)
+      );
+    }
+
+    // Ordenar según la opción seleccionada
+    switch (ordenSeleccionado) {
+      case "titulo":
+        peliculasFiltradas.sort((a, b) => a.Title.localeCompare(b.Title)); // Ordenar A-Z
+        break;
+      case "titulo-desc":
+        peliculasFiltradas.sort((a, b) => b.Title.localeCompare(a.Title)); // Ordenar Z-A
+        break;
+      case "anio-asc":
+        peliculasFiltradas.sort((a, b) => parseInt(a.Year) - parseInt(b.Year)); // Año Ascendente
+        break;
+      case "anio-desc":
+        peliculasFiltradas.sort((a, b) => parseInt(b.Year) - parseInt(a.Year)); // Año Descendente
+        break;
+    }
+
+    // Mostrar las películas filtradas y ordenadas
+    mostrarPeliculas(peliculasFiltradas);
+  });
 });
 
