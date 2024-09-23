@@ -92,3 +92,39 @@ $(document).ready(function () {
     mostrarPeliculas(peliculasFiltradas);
   });
 });
+
+
+  $("#aplicarFiltro").click(function () {
+    let peliculasFiltrada = [...peliculasOriginales]; // Creamos una copia de las películas originales
+
+    const filtroAño = $("#filtroAño").val(); // Año a partir del cual filtrar
+    const ordenSeleccionado = $("#ordena").val(); // Opción de orden seleccionada
+
+    // Filtrar por año si se ingresó un valor
+    if (filtroAño) {
+      peliculasFiltradas = peliculasFiltradas.filter(
+        (pelicula) => parseInt(pelicula.Year) > parseInt(filtroAño)
+      );
+    }
+
+    // Ordenar según la opción seleccionada
+    switch (ordenSeleccionado) {
+      case "tituloAZ":
+        peliculasFiltradas.sort((a, b) => a.Title.localeCompare(b.Title));
+        break;
+      case "tituloZA":
+        peliculasFiltradas.sort((a, b) => b.Title.localeCompare(a.Title));
+        break;
+      case "anio-asc":
+        peliculasFiltradas.sort((a, b) => parseInt(a.Year) - parseInt(b.Year));
+        break;
+      case "anio-desc":
+        peliculasFiltradas.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
+        break;
+    }
+
+    // Mostrar las películas filtradas y ordenadas
+    mostrarPeliculas(peliculasFiltradas);
+  });
+});
+
