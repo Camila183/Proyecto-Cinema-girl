@@ -138,10 +138,10 @@ $(document).ready(function(){
 
         <!-- Contenedor donde se mostrarán los resultados de búsqueda -->
         <!-- Filtros -->
-        <h1 id="result-header">Resultados de la búsqueda</h1>
-        <div id="filtros">
+        <h1 id="result">Resultados de la búsqueda</h1>
+        <div id="filtro">
           <label for="ordenar">Ordenar por:</label>
-          <select id="ordenar">
+          <select id="ordena">
             <option value="titulo">Título (A-Z)</option>
             <option value="titulo-desc">Título (Z-A)</option>
             <option value="anio-asc">Año (Ascendente)</option>
@@ -149,9 +149,9 @@ $(document).ready(function(){
           </select>
 
           <label for="filtroAnio">Mostrar películas después del año:</label>
-          <input type="number" id="filtroAnio" placeholder="Ingrese un año" />
+          <input type="number" id="filtroAño" placeholder="Ingrese un año" />
 
-          <button id="aplicarFiltros">Aplicar Filtros</button>
+          <button id="aplicarFiltro">Aplicar Filtros</button>
         </div>
 
         <div id="movies-container" class="movies-grid"></div>
